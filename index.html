@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sona Study Portal ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #0f172a;
+    color: white;
+}
+
+/* HEADER */
+header {
+    background: #1e293b;
+    text-align: center;
+    padding: 12px;
+    position: relative;
+}
+
+.controls {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.controls button {
+    margin-left: 5px;
+    padding: 5px 8px;
+    cursor: pointer;
+}
+
+.motivation {
+    color: #38bdf8;
+}
+
+/* REMINDER */
+.reminder {
+    background: #facc15;
+    color: black;
+    text-align: center;
+    padding: 8px;
+    font-weight: bold;
+}
+
+/* LAYOUT */
+.container {
+    display: flex;
+    height: calc(100vh - 100px);
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 300px;
+    background: #1e293b;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+/* SECTION */
+.section-title {
+    background: #334155;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.section-content {
+    display: none;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.section-content button {
+    width: 100%;
+    padding: 8px;
+    margin: 3px 0;
+    border: none;
+    background: #475569;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.section-content button:hover {
+    background: #22c55e;
+    color: black;
+}
+
+/* CONTENT */
+.content {
+    flex: 1;
+    background: #020617;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: white;
+}
+
+/* BUDDY */
+.buddy {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    background: #22c55e;
+    padding: 10px;
+    border-radius: 10px;
+    color: black;
+    font-weight: bold;
+}
+
+/* FULLSCREEN */
+.fullscreen header,
+.fullscreen .reminder,
+.fullscreen .sidebar,
+.fullscreen .buddy {
+    display: none;
+}
+
+.fullscreen .content {
+    width: 100%;
+    height: 100vh;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+    }
+
+    .content {
+        height: 80vh;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="controls">
+        <button onclick="toggleBuddy()">🤖</button>
+        <button onclick="toggleFull()">⛶</button>
+    </div>
+
+    <h2>📚 Sona's Study Portal ❤️</h2>
+    <p class="motivation">You are stronger than your excuses 💪</p>
+</header>
+
+<div class="reminder">
+    ⚠️ Sona, start with <b>Geography first</b> 🌍
+</div>
+
+<div class="container">
+
+    <!-- ✅ SIDEBAR -->
+    <div class="sidebar">
+
+        <!-- 🌍 GEOGRAPHY -->
+        <div class="section">
+            <div class="section-title" onclick="toggleSection('geoList')">
+                🌍 Geography ▼
+            </div>
+
+            <div id="geoList" class="section-content">
+
+                <button onclick="loadPage('9. Geography Class 01 - 111022.html')">Class 01</button>
+                <button onclick="loadPage('9. Geography Class 02 - 121022.html')">Class 02</button>
+                <button onclick="loadPage('9. Geography Class 03 - 131022.html')">Class 03</button>
+                <button onclick="loadPage('9. Geography Class 04 - 201022.html')">Class 04</button>
+                <button onclick="loadPage('9. Geography Class 05 - 211022.html')">Class 05</button>
+                <button onclick="loadPage('9. Geography Class 06 - 301022.html')">Class 06</button>
+                <button onclick="loadPage('9. Geography Class 07 - 211122.html')">Class 07</button>
+                <button onclick="loadPage('9. Geography Class 08 - 241122.html')">Class 08</button>
+                <button onclick="loadPage('9. Geography Class 09 - 301122.html')">Class 09</button>
+                <button onclick="loadPage('9. Geography Class 10 - 061222.html')">Class 10</button>
+                <button onclick="loadPage('9. Geography Class 11 - 091222.html')">Class 11</button>
+                <button onclick="loadPage('9. Geography Class 12 - 101222.html')">Class 12</button>
+                <button onclick="loadPage('9. Geography Class 13 - 181222.html')">Class 13</button>
+                <button onclick="loadPage('9. Geography Class 14 - 201222.html')">Class 14</button>
+                <button onclick="loadPage('9. Geography Class 15 - 221222.html')">Class 15</button>
+                <button onclick="loadPage('9. Geography Class 16 - 261222.html')">Class 16</button>
+                <button onclick="loadPage('9. Geography Class 17 - 281222.html')">Class 17</button>
+                <button onclick="loadPage('9. Geography Class 18 - 020123.html')">Class 18</button>
+                <button onclick="loadPage('9. Geography Class 19 - 030123.html')">Class 19</button>
+                <button onclick="loadPage('9. Geography Class 20 - 040123.html')">Class 20</button>
+    
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ✅ CONTENT -->
+    <div class="content">
+        <iframe id="viewer"></iframe>
+    </div>
+
+</div>
+
+<!-- BUDDY -->
+<div class="buddy" id="buddy"></div>
+
+<script>
+function loadPage(page) {
+    const iframe = document.getElementById("viewer");
+    iframe.src = page;
+
+    iframe.onload = function () {
+        try {
+            let doc = iframe.contentDocument || iframe.contentWindow.document;
+            doc.body.style.background = "white";
+            doc.body.style.color = "black";
+        } catch(e) {}
+    }
+}
+
+function toggleSection(id) {
+    let el = document.getElementById(id);
+    el.style.display = (el.style.display === "block") ? "none" : "block";
+}
+
+function toggleFull() {
+    document.body.classList.toggle("fullscreen");
+}
+
+let buddyVisible = true;
+
+function toggleBuddy() {
+    const buddy = document.getElementById("buddy");
+    buddyVisible = !buddyVisible;
+    buddy.style.display = buddyVisible ? "block" : "none";
+}
+
+const messages = [
+    "📘 Start Geography Sona 🌍",
+    "🔥 Keep going!",
+    "💪 One more class!",
+    "🚀 You got this!"
+];
+
+let i = 0;
+
+function updateBuddy() {
+    if (buddyVisible) {
+        document.getElementById("buddy").innerHTML = messages[i];
+        i = (i + 1) % messages.length;
+    }
+}
+
+setInterval(updateBuddy, 3000);
+updateBuddy();
+
+/* AUTO OPEN GEO */
+document.getElementById("geoList").style.display = "block";
+</script>
+
+</body>
+</html>
